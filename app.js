@@ -67,14 +67,14 @@ const renderGamesList = querySnapshot => {
     }
 } 
 
-const to = promise => promise
+const to = promiseFn => promiseFn()
     .then(result => [null, result])
     .catch(error => [error])
 
 const addGame = async e => {
     e.preventDefault()
 
-    const [error, doc] = await to(addDoc(collectionGames, {
+    const [error, doc] = await to(async () => addDoc('abc', {
         title: sanitize(e.target.title.value),
         developedBy: sanitize(e.target.developer.value),
         createdAt: serverTimestamp()
